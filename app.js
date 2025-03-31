@@ -4,6 +4,7 @@ const path = require("path");
 // External Module
 const express = require("express");
 const session = require("express-session");
+const cors = require("cors");
 const MongoDBStore = require("connect-mongodb-session")(session);
 const { default: mongoose } = require("mongoose");
 const multer = require('multer');
@@ -59,6 +60,7 @@ const multerOptions = {
 
 
 app.use(express.urlencoded());
+app.use(cors());
 app.use(multer(multerOptions).single('photo'));
 app.use(express.static(path.join(rootDir, "public")));
 app.use("/uploads", express.static(path.join(rootDir, 'uploads')));
