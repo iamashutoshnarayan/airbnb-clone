@@ -4,11 +4,10 @@ const path = require("path");
 // External Module
 const express = require("express");
 const session = require("express-session");
-const cors = require("cors");
 const MongoDBStore = require("connect-mongodb-session")(session);
 const { default: mongoose } = require("mongoose");
 const multer = require('multer');
-const DB_PATH =
+const DB_URI =
   "mongodb+srv://root:root@ashtshnryn.fc9br.mongodb.net/airbnb?retryWrites=true&w=majority&ssl=true";
 
 //Local Module
@@ -60,7 +59,6 @@ const multerOptions = {
 
 
 app.use(express.urlencoded());
-app.use(cors());
 app.use(multer(multerOptions).single('photo'));
 app.use(express.static(path.join(rootDir, "public")));
 app.use("/uploads", express.static(path.join(rootDir, 'uploads')));
@@ -96,14 +94,14 @@ app.use("/host", hostRouter);
 
 app.use(errorsController.pageNotFound);
 
-const port = process.env.PORT || 5000;
+const DB_PATH = process.env.DB_URI;
 
 mongoose
   .connect(DB_PATH)
   .then(() => {
     console.log("Connected to Mongo");
-    app.listen(port, () => {
-      console.log(`Server running on address http://localhost:${port}`);
+    app.listen(DB_PATH, () => {
+      console.log(`Server running on address http://localhost:${DB_PATH}`);
     });
   })
   .catch((err) => {
