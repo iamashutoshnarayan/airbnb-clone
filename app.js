@@ -94,14 +94,14 @@ app.use("/host", hostRouter);
 
 app.use(errorsController.pageNotFound);
 
-const PORT = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
 mongoose
   .connect(DB_PATH)
   .then(() => {
     console.log("Connected to Mongo");
-    app.listen(PORT, () => {
-      console.log(`Server running on address http://localhost:${PORT}`);
+    app.listen(port, () => {
+      console.log(`Server running on address http://localhost:${port}`);
     });
   })
   .catch((err) => {
