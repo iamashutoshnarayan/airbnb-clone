@@ -8,7 +8,7 @@ const MongoDBStore = require("connect-mongodb-session")(session);
 const { default: mongoose } = require("mongoose");
 const multer = require('multer');
 const DB_PATH =
-  "mongodb+srv://root:root@ashtshnryn.fc9br.mongodb.net/airbnb?retryWrites=true&w=majority&appName=AshtshNryn";
+  "mongodb+srv://root:root@ashtshnryn.fc9br.mongodb.net/airbnb?retryWrites=true&w=majority&ssl=true";
 
 //Local Module
 const storeRouter = require("./routes/storeRouter");
